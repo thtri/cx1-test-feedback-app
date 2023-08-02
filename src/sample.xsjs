@@ -1,6 +1,6 @@
 // import the library to get the db name 
-$.import("SAPGoatBackoffice", "schema");
-var SCHEMALIB = $.SAPGoatBackoffice.schema;
+$.import("test", "schema");
+var SCHEMALIB = $.test.schema;
 
 /**
  * update the quantity of the product with productID in the basket of basketID
