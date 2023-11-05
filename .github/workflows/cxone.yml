@@ -1,0 +1,28 @@
+name: Checkmarx One Scan
+on:
+  push:
+#    branches: [ dev, main, master ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ dev, main, master ]
+
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    container:
+      image: forme-docker.int.repositories.cloud.sap/forme-build:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Checkmarx One CLI Action
+        uses: checkmarx/ast-github-action@main #Github Action version
+        with:
+          project_name: example
+          cx_tenant: sap-staging
+          base_uri: https://checkmarx-stage.tools.sap
+          cx_client_id: ${{ secrets.CX_CLIENT_ID }}
+          cx_client_secret: ${{ secrets.CX_CLIENT_SECRET }}
+          additional_params: --debug
